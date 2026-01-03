@@ -17,6 +17,13 @@
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <link href="assets/css/owl.carousel.min.css" rel="stylesheet" type="text/css">
 <link href="assets/css/owl.theme.default.min.css" rel="stylesheet" type="text/css">
+<style>
+@media (max-width: 768px) {
+  .left-side-img {
+    display: none;
+  }
+}
+</style>
 </head>
 <body>
   <!-- HEADER-SECTION -->
@@ -77,7 +84,6 @@
                         <p>Get notified when we launch and when tickets go live.</p>
                         <form action="https://formspree.io/f/xlgdwwjz" method="POST" class="input-group mb-3 input-field-form">
                             <input type="email" name="email" class="form-control input-form-input" placeholder="Enter your email address" required>
-                            <input type="hidden" name="_redirect" value="thanks.html">
                                 <div class="input-group-append form-button">
                                     <button class="" type="submit">Subscribe</button>
                                 </div>
@@ -120,6 +126,27 @@
     <script src="./assets/js/type.js"></script>
     <script src="assets/js/custom-script.js"></script>
     <script src="./assets/js/video-popup.js"></script>
+    <script>
+        document.querySelector('.input-field-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    window.location.href = 'thanks.html';
+                } else {
+                    alert('There was a problem with your submission. Please try again.');
+                }
+            }).catch(error => {
+                alert('There was a problem with your submission. Please try again.');
+            });
+        });
+    </script>
 </body>
 </html>
     
